@@ -18,8 +18,10 @@
 # Resultados
 
 * TODO: Plotar um gráfico com os resultados das medições das seguintes métricas utilizadas para avaliar o comportamento do *processo filho*:
-	*  *UCP*: ![grafico1](https://i.imgur.com/PlYTJqF.jpg)
-	*  *UCP-MEM*: ![grafico2](https://i.imgur.com/9CDLD3I.jpg)
+*  *UCP*:  
+![grafico1](https://i.imgur.com/PlYTJqF.jpg)
+*  *UCP-MEM*:  
+![grafico2](https://i.imgur.com/9CDLD3I.jpg)
 * TODO: Cada métrica deve ser plotada em duas curvas separadas.
 * TODO: o eixo das abscissas deve representar o tempo medido a cada segundo e o eixo das coordenadas deve representar a métrica medida.
 
