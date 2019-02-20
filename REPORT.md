@@ -17,7 +17,7 @@
 	
 # Resultados
 
-* TODO: Plotar um gráfico com os resultados das medições das seguintes métricas utilizadas para avaliar o comportamento do *processo filho*:
+
 *  *UCP*:  
 ![grafico1](https://i.imgur.com/PlYTJqF.jpg)
 
@@ -38,10 +38,10 @@ Já quando observa-se o gráfico da ucp-mem, nota-se uma mudança brusca na util
 Na int main, cria-se uma condicional para que ,se for digitado menos do que dois argumentos, emita uma mensagem de que seja inserido um ou mais argumentos.  
 Após cria-se um inteiro que receberá o retorno da função fork(), se o inteiro tiver valor menor que zero exibe-se uma mensagem de “erro”, porque a função fork tem que retornar ou zero ou algum número.
 
+```c
 int main(int argc, char **argv) 
+	{
 
-    {
-	
 	if (argc<2)
 	{
 		printf("Por favor use ucp ou ucp-mem\n");
@@ -55,8 +55,8 @@ int main(int argc, char **argv)
 		{
 			printf("Erro\n");
 			exit(-1);
-    }
-
+	}
+```
 
  Neste momento, ele cai para outra condicional, em que se seu valor for zero deduz-se que ele é o filho, nesse momento começa a executar as condicionais dedicadas ao “filho”, em que se o argv escrito for “ucp” ele executa um loop infinito, se o argv escrito for “ucp-mem” ele executa um loop infinito em ele dorme por 1 milésimo de segundo e executa o malloc que ocupa, em Bytes, a quantidade de memória digitada em seus parênteses. 
 
