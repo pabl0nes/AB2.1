@@ -59,9 +59,9 @@ int main(int argc, char **argv)
 ```
 
  Neste momento, ele cai para outra condicional, em que se seu valor for zero deduz-se que ele é o filho, nesse momento começa a executar as condicionais dedicadas ao “filho”, em que se o argv escrito for “ucp” ele executa um loop infinito, se o argv escrito for “ucp-mem” ele executa um loop infinito em ele dorme por 1 milésimo de segundo e executa o malloc que ocupa, em Bytes, a quantidade de memória digitada em seus parênteses. 
-
-else if (pid==0)
-		{
+```c
+    else if (pid==0)
+		      {
 			
 			if (strcmp(argv[1], "ucp")==0)
 			{
@@ -74,10 +74,10 @@ else if (pid==0)
 					malloc(sizeof(10000));
 				}
 			}
-
+```
 Quando esse inteiro receber um valor que for diferente de zero, deduzimos que ele entrou no processo pai, em que esse inteiro executará o monitoramento  do trabalho desempenhado pelo filho tanto na cpu, quanto na memória.
-
-else 
+```c
+     else 
 		{
 
 			if (strcmp(argv[1], "ucp")==0)
@@ -147,9 +147,9 @@ else
 
 	printf("mem_usage == %s\n", mem_usage);
 }
-
+```
 Em seguida, chama-se uma função para encerrar o processo filho.
-
+```c
     void matar_meu_filho(int pid)
      {
 	char bash_cmd[256] = "kill -TERM 0";
@@ -170,9 +170,8 @@ Em seguida, chama-se uma função para encerrar o processo filho.
 	pclose(pipe);
 
 }
+```
 
-
-Tal função foi adaptada do trecho de código disponibilizado.
 
 
 
