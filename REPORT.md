@@ -20,20 +20,27 @@
 * TODO: Plotar um gráfico com os resultados das medições das seguintes métricas utilizadas para avaliar o comportamento do *processo filho*:
 *  *UCP*:  
 ![grafico1](https://i.imgur.com/PlYTJqF.jpg)
+
+O comportamento não foi o esperado, pois nota-se uma onda com vales e picos quando se executa só a ucp, o valor começa alto e decresce e em seguida volta a aumentar, porém esperávamos que ocorresse apenas um aumento progressivo, pois em tese ,devido ao loop ser ‘infinito”, era esperado um consumo crescente, como analisado no gráfico.
+ 
 *  *UCP-MEM*:  
 ![grafico2](https://i.imgur.com/9CDLD3I.jpg)
-* TODO: Cada métrica deve ser plotada em duas curvas separadas.
-* TODO: o eixo das abscissas deve representar o tempo medido a cada segundo e o eixo das coordenadas deve representar a métrica medida.
+
+Já quando observa-se o gráfico da ucp-mem, nota-se uma mudança brusca na utilização da ucp, comparando com os valores anteriormente recebidos, é notório uma redução na porcentagem de uso, como relata o gráfico:
+
+
+
 
 
 # Discussão
 
 
-Na int main, cria-se uma condicional para que ,se for digitado menos do que dois argumentos, emita uma mensagem de que seja inserido um ou mais argumentos.
+Na int main, cria-se uma condicional para que ,se for digitado menos do que dois argumentos, emita uma mensagem de que seja inserido um ou mais argumentos.  
 Após cria-se um inteiro que receberá o retorno da função fork(), se o inteiro tiver valor menor que zero exibe-se uma mensagem de “erro”, porque a função fork tem que retornar ou zero ou algum número.
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) 
+
+    {
 	
 	if (argc<2)
 	{
@@ -48,7 +55,7 @@ int main(int argc, char **argv)
 		{
 			printf("Erro\n");
 			exit(-1);
-		}
+    }
 
 
  Neste momento, ele cai para outra condicional, em que se seu valor for zero deduz-se que ele é o filho, nesse momento começa a executar as condicionais dedicadas ao “filho”, em que se o argv escrito for “ucp” ele executa um loop infinito, se o argv escrito for “ucp-mem” ele executa um loop infinito em ele dorme por 1 milésimo de segundo e executa o malloc que ocupa, em Bytes, a quantidade de memória digitada em seus parênteses. 
@@ -96,8 +103,8 @@ else
 	}
 
 
-void monitorar_ucp(int pid)
-{
+    void monitorar_ucp(int pid)
+    {
 	char bash_cmd[256];
 	sprintf(bash_cmd, "ps u %d | awk '{print $3}' | grep -v CPU", pid);
 	char buffer[1000];
@@ -108,7 +115,7 @@ void monitorar_ucp(int pid)
 	if (NULL == pipe) {
 		perror("pipe");
 		exit(1);
-	} 
+    } 
 	
 	char* cpu_usage = fgets(buffer, sizeof(buffer), pipe);
 	len = strlen(bash_cmd);
@@ -116,11 +123,11 @@ void monitorar_ucp(int pid)
 	pclose(pipe);
 
 	printf("cpu_usage == %s", cpu_usage);
-}
+     }
 
 
-void monitorar_mem(int pid)
-{
+    void monitorar_mem(int pid)
+    {
 	char bash_cmd[256];
 	sprintf(bash_cmd, "ps u %d | awk '{print $5}' | grep -v VSZ", pid);
 	char buffer[1000];
@@ -131,7 +138,7 @@ void monitorar_mem(int pid)
 	if (NULL == pipe) {
 		perror("pipe");
 		exit(1);
-	} 
+    } 
 	
 	char* mem_usage = fgets(buffer, sizeof(buffer), pipe);
 	len = strlen(bash_cmd);
@@ -143,8 +150,8 @@ void monitorar_mem(int pid)
 
 Em seguida, chama-se uma função para encerrar o processo filho.
 
-void matar_meu_filho(int pid)
-{
+    void matar_meu_filho(int pid)
+     {
 	char bash_cmd[256] = "kill -TERM 0";
 	sprintf(bash_cmd, "kill -TERM %d",pid);
 	char buffer[1000];
@@ -155,7 +162,7 @@ void matar_meu_filho(int pid)
 	if (NULL == pipe) {
 		perror("pipe");
 		exit(1);
-	} 
+     } 
 	
 	char* mem_usage = fgets(buffer, sizeof(buffer), pipe);
 	len = strlen(bash_cmd);
@@ -168,12 +175,9 @@ void matar_meu_filho(int pid)
 Tal função foi adaptada do trecho de código disponibilizado.
 
 
-O comportamento não foi o esperado, pois nota-se uma onda com vales e picos quando se executa só a ucp, o valor começa alto e decresce e em seguida volta a aumentar, porém esperávamos que ocorresse apenas um aumento progressivo, pois em tese ,devido ao loop ser ‘infinito”, era esperado um consumo crescente, como analisado no gráfico:
- 
 
 
 
 
-Já quando observa-se o gráfico da ucp-mem, nota-se uma mudança brusca na utilização da ucp, comparando com os valores anteriormente recebidos, é notório uma redução na porcentagem de uso, como relata o gráfico:
 
 
